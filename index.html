@@ -131,21 +131,25 @@ button:disabled{opacity:.65;cursor:wait;transform:none}
     <p class="loading-subtitle" id="loadingHint">မင်းရဲ့နေ့လေး လှပပါစေ ☁️</p>
   </div>
 </div>
+
 <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyCgHbawwBu4GrxqnjnjcxLZsEcqmWZKkdw",
+    authDomain: "goodmorning-58171.firebaseapp.com",
+    projectId: "goodmorning-58171",
+    storageBucket: "goodmorning-58171.firebasestorage.app",
+    messagingSenderId: "689269651343",
+    appId: "1:689269651343:web:bf2d648b89deda3fef7dfa"
+  };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCgHbawwBu4GrxqnjnjcxLZsEcqmWZKkdw",
-  authDomain: "goodmorning-58171.firebaseapp.com",
-  projectId: "goodmorning-58171",
-  storageBucket: "goodmorning-58171.firebasestorage.app",
-  messagingSenderId: "689269651343",
-  appId: "1:689269651343:web:bf2d648b89deda3fef7dfa"
-};
-
-const app = initializeApp(firebaseConfig);
-
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+</script>
+  
+<script>
 const note=document.getElementById('note');
 const surprise=document.getElementById('surprise');
 const toast=document.getElementById('toast');
