@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef7ff">
+<title>Nadi Waing - Good morning</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap');
+:root{--ink:#405872;--muted:#7d91a6;--blue:#719bc2}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:20px;overflow-x:hidden;color:var(--ink);font-family:"Noto Sans Myanmar","Myanmar Text",system-ui,sans-serif;background:linear-gradient(145deg,#fffaf1 0%,#edf7ff 50%,#e9eaff 100%)}
+.sky-glow{position:fixed;width:70vmin;height:70vmin;top:-32vmin;left:-20vmin;border-radius:50%;background:#fff0bd;opacity:.65;filter:blur(5px);pointer-events:none}
+.sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.star{position:absolute;color:#fff;font-size:22px;text-shadow:0 0 14px #8fb5dc;animation:twinkle 3s ease-in-out infinite}
+.star:nth-child(1){top:12%;left:14%}.star:nth-child(2){top:25%;right:13%;animation-delay:-1s}.star:nth-child(3){bottom:18%;left:11%;animation-delay:-2s}.star:nth-child(4){bottom:13%;right:16%;animation-delay:-.5s}
+.cloud{position:absolute;width:105px;height:30px;border-radius:40px;background:#ffffffb8;filter:drop-shadow(0 8px 12px #9ab7d522);animation:cloud 12s ease-in-out infinite alternate}
+.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}.cloud:before{width:43px;height:43px;left:15px;bottom:6px}.cloud:after{width:54px;height:54px;right:14px;bottom:2px}
+.cloud.a{top:18%;right:4%;transform:scale(.8)}.cloud.b{bottom:13%;left:2%;transform:scale(.65);animation-delay:-5s}
+.card{position:relative;width:min(100%,430px);padding:29px 23px 25px;text-align:center;border:1px solid #ffffff;border-radius:32px;background:#ffffffd9;backdrop-filter:blur(18px);box-shadow:0 25px 80px #819dc72a,inset 0 1px 0 white;animation:enter .8s ease both}
+.pill{display:inline-block;padding:7px 13px;border:1px solid #dce8f5;border-radius:99px;background:#ffffffa6;color:#8296ab;font-size:.72rem}
+h1{margin:17px 0 8px;font-size:clamp(1.8rem,8vw,2.4rem);font-weight:600;letter-spacing:-.04em;color:#4f6d8c,}
+h1 span{color: #E15AAC;}
+.intro{margin:0;color:var(--muted);font-size:.9rem;line-height:2;font-weight: 600;}
+.scene{height:142px;display:grid;place-items:center;position:relative}
+.flower{font-size:5rem;animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 9px 10px #dfa5ad3d)}
+.mini{position:absolute;font-size:1.25rem;animation:heart 3s ease-in-out infinite}.mini.a{left:23%;top:26%}.mini.b{right:23%;top:20%;animation-delay:-1.7s}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+button{font-family:inherit;font-size:.83rem;font-weight:600;border:0;border-radius:99px;padding:12px 16px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+button:hover{transform:translateY(-3px);box-shadow:0 10px 22px #789fc344}
+button:active{transform:scale(.96)}
+button:focus-visible{outline:3px solid #527ca5;outline-offset:3px}
+button:disabled{opacity:.65;cursor:wait;transform:none}
+.button-hint {
+  display: inline-block;
+  font-size: 22px;
+  animation: handHint 1.5s ease-in-out infinite;
+  position: absolute;
+  margin-left: 50px;
+}
+
+@keyframes handHint {
+  0%, 100% {
+    opacity: 0.15;
+    transform: translateY(-2px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(3px);
+  }
+}
+.primary{background:#739cc3;color:white;box-shadow:0 7px 17px #739cc333;margin-top: 20px;}
+.secondary{background:#fff;color:#6484a4;border:1px solid #dce8f5;margin-top: 10px;}
+.panel{display:none;margin-top:20px;padding:17px 13px;border-radius:22px;background:#f5f9ff;border:2px solid #e5eef8;box-shadow:0 7px 17px #739cc333}
+.panel.show{display:block;animation:panelIn .5s cubic-bezier(.2,.8,.2,1) both}
+.panel h2{margin:0 0 9px;color:#58799b;font-size:1.1rem;font-weight:600}
+.panel p{margin:0;color:#657c92;font-size:.9rem;line-height:2;font-weight: 600;}
+.small-note{margin-top:10px!important;color:#91a1b2!important;font-size:.72rem!important;font-weight: 600;}
+.moods{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.mood{background:white;border:1px solid #dce8f5;color:#58799b;padding:9px 12px}
+.mood.selected{background:#dceeff;border-color:#9ec5e9;transform:scale(1.05)}
+.reply{min-height:45px}
+.footer{margin:18px 0 0;color:#9aa9b8;font-size:.68rem}
+#petalLayer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:20}
+.petal{position:absolute;top:65%;font-size:23px;animation:burst 1.4s ease-out forwards}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);padding:10px 15px;background:#526f8d;color:white;border-radius:99px;font-size:.76rem;opacity:0;pointer-events:none;transition:.3s;white-space:nowrap;box-shadow:0 8px 25px #526f8d33;z-index:30}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* Loading overlay */
+.loading-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:25px;background:linear-gradient(150deg,#fffaf1 0%,#edf7ff 48%,#e9eaff 100%);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+.loading-screen.active{opacity:1;visibility:visible}
+.loading-card{width:min(100%,330px);padding:30px 22px;text-align:center;border:1px solid #fff;border-radius:30px;background:#ffffffd9;box-shadow:0 22px 65px #819dc72b;transform:translateY(12px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.loading-screen.active .loading-card{transform:translateY(0) scale(1)}
+.loading-flower{font-size:3.8rem;display:inline-block;animation:loadingFloat 1.2s ease-in-out infinite}
+.loading-title{margin:13px 0 7px;font-size:1.15rem;font-weight:600;color:#557596}
+.loading-subtitle{margin:0;color:#8295a8;font-size:.8rem;line-height:1.9}
+.progress-track{height:6px;margin:22px 4px 10px;background:#e4eef8;border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#a6cdec,#d8b7d9,#f0c6d0);border-radius:99px}
+.loading-screen.active .progress-bar{animation:loadProgress 2.1s ease-in-out forwards}
+.loading-dots span{display:inline-block;animation:dot 1s ease-in-out infinite;color:#83a9ce}
+.loading-dots span:nth-child(2){animation-delay:.15s}.loading-dots span:nth-child(3){animation-delay:.3s}
+@keyframes loadingFloat{0%,100%{transform:translateY(0) rotate(-7deg) scale(1)}50%{transform:translateY(-9px) rotate(7deg) scale(1.06)}}
+@keyframes loadProgress{0%{width:0}35%{width:45%}70%{width:76%}100%{width:100%}}
+@keyframes dot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-10px) rotate(4deg)}}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes cloud{from{translate:-8px 0}to{translate:18px -6px}}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes heart{0%,100%{opacity:.25;transform:translateY(8px) scale(.8)}50%{opacity:1;transform:translateY(-6px) scale(1.15)}}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) rotate(0) scale(.7)}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1.3)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky-glow" aria-hidden="true"></div>
+<div class="sky" aria-hidden="true"><span class="star">✦</span><span class="star">✧</span><span class="star">✦</span><span class="star">✧</span><div class="cloud a"></div><div class="cloud b"></div></div>
+<div id="petalLayer" aria-hidden="true"></div>
+<main class="card">
+  <div class="pill">I'm Thant Zin Htun</div>
+  <h1>Good morning ☀️<br><span>♡ Nadi Waing ♡</span></h1>
+  <p class="intro">မင်းအတွက် စာတိုလေး ရှိတယ်နော် 💌</p>
+  <div class="scene"><span class="mini a">♡</span><span class="mini b">✧</span><div class="flower" aria-hidden="true">🌷</div></div>
+  <div class="buttons">
+    <button class="primary" id="surprise"><escape><span class="button-hint">👆</span></escape>စာလေး ဖွင့်ကြည့်မယ် ✨</button>
+    <button class="secondary" id="moodButton"><escape><span class="button-hint">👆</span></escape>ဒီနေ့ ဘယ်လိုနေလဲ? ☁️</button>
+  </div>
+  <section class="panel" id="note" aria-live="polite">
+    <h2>မင်းအတွက် ♡</h2>
+    <p>ဒီနေ့မှာ မင်းအလှပဆုံးပြုံးနိုင်ပါစေ။ 🌼<br>ကိုယ့်ကိုယ်ကိုလည်း ဂရုစိုက်ဖို့ မမေ့နဲ့နော်။ <br> I Love Nadi Waing ♡</p>
+    <p class="small-note">ရေများများသောက်၊ အနားယူဖို့ မမေ့နဲ့နော် ☁️</p>
+  </section>
+  <section class="panel" id="moodPanel" aria-live="polite">
+    <h2>ဒီနေ့ အဆင်ပြေရဲ့လား ? 🌤️</h2>
+    <div class="moods">
+      <button class="mood" data-mood="good">😊 ကောင်းတယ်</button>
+      <button class="mood" data-mood="sleepy">😴 အိပ်ချင်တယ်</button>
+      <button class="mood" data-mood="sad">🥲 သိပ်မကောင်းဘူး</button>
+    </div>
+    <p class="reply" id="reply">တစ်ခုကို ရွေးကြည့်နော်။</p>
+  </section>
+  <p class="footer">ငါသန့်ဇင်ထွန်း ဆုတောင်းပေးတာပါ ♡</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="loading-screen active" id="loadingScreen" aria-hidden="false">
+  <div class="loading-card">
+    <div class="loading-flower">🌷</div>
+    <div class="loading-title" id="loadingTitle">ခဏလောက် စောင့်ပါနော်</div>
+    <p class="loading-subtitle" id="loadingSubtitle">ပန်းလေး ပွင့်လာဖို့ ခဏလေး စောင့်နော်<span class="loading-dots"><span> ·</span><span> ·</span><span> ·</span></span></p>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    <p class="loading-subtitle" id="loadingHint">မင်းရဲ့နေ့လေး လှပပါစေ ☁️</p>
+  </div>
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCgHbawwBu4GrxqnjnjcxLZsEcqmWZKkdw",
+  authDomain: "goodmorning-58171.firebaseapp.com",
+  projectId: "goodmorning-58171",
+  storageBucket: "goodmorning-58171.firebasestorage.app",
+  messagingSenderId: "689269651343",
+  appId: "1:689269651343:web:bf2d648b89deda3fef7dfa"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const note=document.getElementById('note');
+const surprise=document.getElementById('surprise');
+const toast=document.getElementById('toast');
+const loadingScreen=document.getElementById('loadingScreen');
+let toastTimer, loadingTimer;
+// Show a welcome loading screen automatically when the website first opens.
+document.body.style.overflow='hidden';
+loadingTimer=setTimeout(()=>{
+  loadingScreen.classList.remove('active');
+  loadingScreen.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+},2200);
+function showToast(text){
+  toast.textContent=text; toast.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>toast.classList.remove('show'),2200);
+}
+function flowerBurst(){
+  const layer=document.getElementById('petalLayer');
+  const symbols=['🌸','🌷','✨','♡','🌼','✦','💗'];
+  for(let i=0;i<20;i++){
+    const p=document.createElement('span');p.className='petal';
+    p.textContent=symbols[i%symbols.length];
+    p.style.left=(window.innerWidth/2+(Math.random()*70-35))+'px';
+    p.style.setProperty('--x',(Math.random()*300-150)+'px');
+    p.style.setProperty('--y',(-100-Math.random()*260)+'px');
+    p.style.setProperty('--r',(Math.random()*180-90)+'deg');
+    p.style.animationDelay=(Math.random()*.18)+'s';
+    layer.appendChild(p);setTimeout(()=>p.remove(),1700);
+  }
+}
+function runLoading(action, title, subtitle, hint){
+  if(loadingScreen.classList.contains('active')) return;
+  document.getElementById('loadingTitle').textContent=title;
+  document.getElementById('loadingSubtitle').innerHTML=subtitle+'<span class="loading-dots"><span> ·</span><span> ·</span><span> ·</span></span>';
+  document.getElementById('loadingHint').textContent=hint;
+  const bar=document.getElementById('progressBar');
+  bar.style.animation='none';void bar.offsetWidth;bar.style.animation='';
+  loadingScreen.classList.add('active');
+  loadingScreen.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  clearTimeout(loadingTimer);
+  loadingTimer=setTimeout(()=>{
+    loadingScreen.classList.remove('active');
+    loadingScreen.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    action();
+  },2200);
+}
+surprise.addEventListener('click',()=>{
+  if(note.classList.contains('show')){
+    note.classList.remove('show');
+    surprise.textContent='စာတိုလေး ဖွင့်ကြည့်မယ် ✨';
+    showToast('နောက်တစ်ခါလည်း ပြန်ဖွင့်ကြည့်လို့ရတယ်နော် ☁️');
+    return;
+  }
+  surprise.disabled=true;
+  runLoading(()=>{
+    note.classList.add('show');
+    surprise.textContent='စာလေးကို ပိတ်မယ် ♡';
+    flowerBurst();
+    showToast('မင်းအတွက် ပန်းလေးတွေ ပွင့်လာပြီ 🌷');
+    surprise.disabled=false;
+    note.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },'မင်းအတွက် ပြင်ဆင်နေပါတယ်','ပန်းလေးတွေ ပွင့်လာဖို့ ခဏလေး စောင့်နော်','မင်းရဲ့နေ့လေး လှပပါစေ ☁️');
+});
+document.getElementById('moodButton').addEventListener('click',()=>{
+  const panel=document.getElementById('moodPanel');
+  if(panel.classList.contains('show')){
+    panel.classList.remove('show');
+    document.getElementById('moodButton').textContent='ဒီနေ့ ဘယ်လိုနေလဲ? ☁️';
+    return;
+  }
+  const btn=document.getElementById('moodButton');
+  btn.disabled=true;
+  runLoading(()=>{
+    panel.classList.add('show');
+    btn.textContent='အခြေအနေကိုပိတ်မယ် ♡';
+    btn.disabled=false;
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+    showToast('မင်းရဲ့ mood လေး ရွေးကြည့်နော် 💙');
+  },'မင်းအတွက် ပြင်ဆင်နေပါတယ်','မင်းအတွက်ရွေးလို့ရအောင် လုပ်နေပါတယ်','အေးအေးဆေးဆေး ရွေးနော် 🌤️');
+});
+const replies={
+ good:'ဝမ်းသာလိုက်တာ 😊 ဒီနေ့လေးလည်း အဆင်ပြေချောမွေ့ပါစေနော်🌷',
+ sleepy:'ဒါဆို လုပ်စရာရှိတာလုပ်ပြီး ခဏလောက် ပြန်အိပ်လိုက်နော် 😴',
+ sad:'ဒီနေ့ အဆင်မပြေရင် ကိုယ့်ကိုယ်ကို ဂရုစိုက်ပါနော် 💙'
+};
+document.querySelectorAll('.mood').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.mood').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('reply').textContent=replies[btn.dataset.mood];
+  flowerBurst();
+  showToast('မင်းရွေးထားတဲ့ mood လေး သိပြီနော် 💌');
+}));
+</script>
+</body>
+</html>
