@@ -134,7 +134,6 @@ button:disabled{opacity:.65;cursor:wait;transform:none}
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgHbawwBu4GrxqnjnjcxLZsEcqmWZKkdw",
@@ -146,7 +145,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 const note=document.getElementById('note');
 const surprise=document.getElementById('surprise');
